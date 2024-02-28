@@ -1,0 +1,23 @@
+{
+  "name": "proveance-backend",
+  "version": "1.0.0",
+  "description": "Proveance dApp backend",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.22",
+    "express": "^4.18.2",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5"
+  }
+}
