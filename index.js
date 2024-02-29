@@ -15,7 +15,7 @@ dotenv_1.default.config();
 const port = process.env.PORT || 3000;
 // Routes
 app.get('/api/web2/connection', (req, res) => {
-    const redirectUrl = 'https://thisisdenver-sandbox.biapi.pro/2.0/auth/webview/connect?client_id=65388666&redirect_uri=http://localhost:8000/api/web2/access';
+    const redirectUrl = 'https://buildhathon-sandbox.biapi.pro/2.0/auth/webview/connect?client_id=61176337&redirect_uri=http://localhost:8000/api/web2/access';
     res.redirect(redirectUrl);
 });
 app.get('/api/web2/access', (req, res) => {
@@ -28,7 +28,7 @@ app.get('/api/web2/access', (req, res) => {
         client_id: process.env.CLIENT_ID,
         client_secret: process.env.CLIENT_SECRET
     };
-    fetch(`https://thisisdenver-sandbox.biapi.pro/2.0/auth/token/access`, {
+    fetch(`https://buildhathon-sandbox.biapi.pro/2.0/auth/token/access`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ app.get('/api/web2/access', (req, res) => {
 });
 app.post('/api/web2/balance', (req, res) => {
     const { access_token } = req.body;
-    fetch(`https://thisisdenver-sandbox.biapi.pro/2.0/users/me/accounts`, {
+    fetch(`https://buildhathon-sandbox.biapi.pro/2.0/users/me/accounts`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + access_token,
@@ -58,7 +58,10 @@ app.post('/api/web2/balance', (req, res) => {
     })
         .then((response) => response.json())
         .then((data) => {
-        res.json(data.balance);
+        const resData = {
+            "balance": data.balance
+        };
+        res.json(resData);
     })
         .catch((error) => {
         console.error('Error:', error);
@@ -67,7 +70,7 @@ app.post('/api/web2/balance', (req, res) => {
 app.post('/api/web2/payments', (req, res) => {
     const { access_token, limit_date, amount, name, condition } = req.body;
     let nbPayments = 0;
-    fetch(`https://thisisdenver-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
+    fetch(`https://buildhathon-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + access_token,
