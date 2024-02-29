@@ -1,0 +1,67 @@
+{
+  "chains": [
+    {
+      "chainId": 1,
+      "name": "Ethereum Mainnet",
+      "symbol": "ETH",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/ethereum-eth-logo.svg"
+    },
+    {
+      "chainId": 11155111,
+      "name": "Sepolia",
+      "symbol": "ETH",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/ethereum-eth-logo.svg"
+    },
+    {
+      "chainId": 42161,
+      "name": "Ethereum Arbitrum",
+      "symbol": "ETH",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/ethereum-eth-logo.svg"
+    },
+    {
+      "chainId": 10,
+      "name": "Ethereum Optimism",
+      "symbol": "ETH",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/ethereum-eth-logo.svg"
+    },
+    {
+      "chainId": 137,
+      "name": "Polygon",
+      "symbol": "MATIC",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/polygon-matic-logo.svg"
+    },
+    {
+      "chainId": 56,
+      "name": "Binance Smart Chain",
+      "symbol": "BNB",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/bnb-bnb-logo.png"
+    },
+    {
+      "chainId": 43114,
+      "name": "Avalanche",
+      "symbol": "AVAX",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/Avalanche_AVAX_Logo.png"
+    },
+    {
+      "chainId": 43113,
+      "name": "Avalanche Fuji",
+      "symbol": "fAVAX",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/Avalanche_AVAX_Logo.png"
+    },
+    {
+      "chainId": 8453,
+      "name": "Ethereum Base",
+      "symbol": "ETH",
+      "decimals": 18,
+      "logoURI": "/images/Token_Logo/ethereum-eth-logo.svg"
+    }
+  ]
+}
