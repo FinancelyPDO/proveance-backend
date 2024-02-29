@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { GetWalletBalances } from './Web3Balance/getWalletBalances';
 
 // App config
 const cors = require('cors');
@@ -104,6 +105,15 @@ app.post('/api/web2/payments', (req, res) => {
     .catch((error: any) => {
         console.error('Error:', error);
     });
+});
+
+app.post('/api/web3/passaddress', (req, res) => {
+    const ethAddress = req.body.ethAddress;
+
+  if (!ethAddress) {
+    return res.status(400).send('Ethereum address is required');
+  }
+  res.json(GetWalletBalances(ethAddress));
 });
 
 app.listen(port, () => {
