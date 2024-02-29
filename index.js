@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Imports
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 // App config
@@ -15,11 +14,11 @@ app.use(express_1.default.json());
 dotenv_1.default.config();
 const port = process.env.PORT || 3000;
 // Routes
-app.get('/web2/connection', (req, res) => {
-    const redirectUrl = 'https://thisisdenver-sandbox.biapi.pro/2.0/auth/webview/connect?client_id=65388666&redirect_uri=http://localhost:8000/web2/access';
+app.get('/api/web2/connection', (req, res) => {
+    const redirectUrl = 'https://thisisdenver-sandbox.biapi.pro/2.0/auth/webview/connect?client_id=65388666&redirect_uri=http://localhost:8000/api/web2/access';
     res.redirect(redirectUrl);
 });
-app.get('/web2/access', (req, res) => {
+app.get('/api/web2/access', (req, res) => {
     const code = req.query.code;
     const connectionId = req.query.connection_id;
     console.log('Code:', code);
@@ -36,20 +35,19 @@ app.get('/web2/access', (req, res) => {
         },
         body: JSON.stringify(data),
     })
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
         console.log('Access Token:', data.access_token);
         const resAccess = {
             access_token: data.access_token
         };
-        res.json(resAccess);
+        res.redirect(`http://localhost:3000/proof-of-reserve?access_token=${data.access_token}`);
     })
-        .catch(error => {
+        .catch((error) => {
         console.error('Error:', error);
     });
 });
-// access_token IS REQUIRED TO CALL
-app.post('/web2/data', (req, res) => {
+app.post('/api/web2/balance', (req, res) => {
     const { access_token } = req.body;
     fetch(`https://thisisdenver-sandbox.biapi.pro/2.0/users/me/accounts`, {
         method: 'GET',
@@ -58,11 +56,42 @@ app.post('/web2/data', (req, res) => {
             'Content-Type': 'application/json'
         },
     })
-        .then(response => response.json())
-        .then(data => {
-        res.json(data);
+        .then((response) => response.json())
+        .then((data) => {
+        res.json(data.balance);
     })
-        .catch(error => {
+        .catch((error) => {
+        console.error('Error:', error);
+    });
+});
+app.post('/api/web2/payments', (req, res) => {
+    const { access_token, limit_date, amount, name, condition } = req.body;
+    let nbPayments = 0;
+    fetch(`https://thisisdenver-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + access_token,
+            'Content-Type': 'application/json'
+        },
+    })
+        .then((response) => response.json())
+        .then((data) => {
+        data.transactions.map((transaction) => {
+            if (transaction.date >= limit_date && transaction.wording == name) {
+                if (condition == "low" && Math.abs(transaction.value) < amount) {
+                    nbPayments++;
+                }
+                if (condition == "high" && Math.abs(transaction.value) > amount) {
+                    nbPayments++;
+                }
+                if (condition == "equl" && Math.abs(transaction.value) == amount) {
+                    nbPayments++;
+                }
+            }
+        });
+        res.json(nbPayments);
+    })
+        .catch((error) => {
         console.error('Error:', error);
     });
 });
