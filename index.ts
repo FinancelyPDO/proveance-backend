@@ -53,6 +53,7 @@ app.get('/api/web2/access', (req, res) => {
 
 app.post('/api/web2/balance', (req, res) => {
     const { access_token } = req.body;
+
     fetch(`https://thisisdenver-sandbox.biapi.pro/2.0/users/me/accounts`, {
         method: 'GET',
         headers: {
@@ -62,7 +63,10 @@ app.post('/api/web2/balance', (req, res) => {
     })
     .then((response: any) => response.json())
     .then((data: any) => {
-        res.json(data.balance);
+        const resData = {
+            "balance": data.balance
+        }
+        res.json(resData);
     })
     .catch((error: any) => {
         console.error('Error:', error);
