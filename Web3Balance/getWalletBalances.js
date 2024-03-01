@@ -16,7 +16,6 @@ exports.GetWalletBalances = void 0;
 const erc20ABI_1 = require("./constants/erc20ABI");
 const viem_1 = require("viem");
 const client_1 = __importDefault(require("./constants/client"));
-const chainData_json_1 = __importDefault(require("./constants/chainData.json"));
 const chainifiedList_json_1 = __importDefault(require("./constants/chainifiedList.json"));
 const jsonTokenLists = [chainifiedList_json_1.default];
 const publicClients = client_1.default;
@@ -68,27 +67,28 @@ const GetWalletBalances = (address) => __awaiter(void 0, void 0, void 0, functio
             const newTokenInfo = allBalances.reduce((acc, balance) => (Object.assign(Object.assign({}, acc), balance)), {}); // Transform the array into an object [{},{}] => {0:{},1:{}}
             allTokenInfo = Object.assign(Object.assign({}, allTokenInfo), newTokenInfo);
         }
+        console.log(allTokenInfo);
         // For the token chain :
-        const chainBalancePromises = chainData_json_1.default.chains.map(chain => {
-            return publicClients[chain.chainId].getBalance({ address }).then(rawBalance => {
-                const balance = (0, viem_1.formatUnits)(rawBalance, chain.decimals);
-                if (balance && balance != '0') {
-                    return {
-                        [chain.chainId]: {
-                            name: chain.name,
-                            symbol: chain.symbol,
-                            decimals: chain.decimals,
-                            logoURI: chain.logoURI,
-                            balance: balance
-                        }
-                    };
-                }
-            }).catch(error => { });
-        });
-        const allChainBalances = yield Promise.all(chainBalancePromises);
-        const tempallTokenChainInfo = allChainBalances.reduce((acc, balance) => (Object.assign(Object.assign({}, acc), balance)), {});
-        allTokenChainInfo = Object.assign(Object.assign({}, allTokenChainInfo), tempallTokenChainInfo); //I do this because I have a typescript error of void ... (I could do this either : // @ts-ignore )
+        // const chainBalancePromises = chainData.chains.map(chain => {
+        //     return publicClients[chain.chainId].getBalance({ address }).then(rawBalance => {
+        //         const balance = formatUnits(rawBalance, chain.decimals);
+        //         if (balance && balance != '0') {
+        //             return {
+        //                 [chain.chainId]: {
+        //                     name: chain.name,
+        //                     symbol: chain.symbol,
+        //                     decimals: chain.decimals,
+        //                     logoURI: chain.logoURI,
+        //                     balance: balance
+        //                 }
+        //             };
+        //         }
+        //     }).catch(error => { });
+        // });
+        // const allChainBalances = await Promise.all(chainBalancePromises);
+        // const tempallTokenChainInfo = allChainBalances.reduce((acc, balance) => ({ ...acc, ...balance }), {});  
+        // allTokenChainInfo = { ...allTokenChainInfo, ...tempallTokenChainInfo }; //I do this because I have a typescript error of void ... (I could do this either : // @ts-ignore )
     }
-    return { allTokenInfo, allTokenChainInfo };
+    return { allTokenInfo };
 });
 exports.GetWalletBalances = GetWalletBalances;
