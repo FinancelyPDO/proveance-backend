@@ -1,0 +1,55 @@
+{
+  "name": "CoinGecko",
+  "logoURI": "https://www.coingecko.com/assets/thumbnail-007177f3eca19695592f0b8b0eabbdae282b54154e1be912285c9034ea6cbaf2.png",
+  "keywords": [
+    "defi"
+  ],
+  "timestamp": "2024-01-02T13:07:49.678+00:00",
+  "tokens": [
+    {
+      "chainId": 1,
+      "address": "0x4eFcE4C758ddFB3911A1a1282a29CE0BDB16Ef86",
+      "name": "WOW",
+      "symbol": "",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/33341/thumb/logo_%283%29.png?1701525830"
+    },
+    {
+      "chainId": 1,
+      "address": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+      "name": "Tether",
+      "symbol": "USDT",
+      "decimals": 6,
+      "logoURI": "https://assets.coingecko.com/coins/images/325/thumb/Tether.png?1696501661",
+      "extensions": {
+        "bridgeInfo": {
+          "10": {
+            "tokenAddress": "0x94b008aA00579c1307B0EF2c499aD98a8ce58e58"
+          },
+          "137": {
+            "tokenAddress": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+          },
+          "42161": {
+            "tokenAddress": "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9"
+          },
+          "43114": {
+            "tokenAddress": "0x9702230A8Ea53601f5cD2dc00fDBc13d4dF4A8c7"
+          }
+        }
+      }
+    },
+    {
+      "chainId": 56,
+      "address": "0x55d398326f99059fF775485246999027B3197955",
+      "name": "Tether",
+      "symbol": "USDT",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/325/thumb/Tether.png?1696501661"
+    }
+  ],
+  "version": {
+    "major": 132,
+    "minor": 0,
+    "patch": 0
+  }
+}

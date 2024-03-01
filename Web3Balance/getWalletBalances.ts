@@ -1,21 +1,12 @@
-'use client'
-
-import { erc20ABI } from './dashboard_components/constants/erc20ABI';
+import { erc20ABI } from './constants/erc20ABI';
 import { formatUnits } from 'viem'
-import clients from './dashboard_components/client';
-import chainData from './dashboard_components/constants/chainData.json';
-import { AllTokenInfo, AllTokenChainInfo } from '../types/index';
+import clients from './constants/client';
+import chainData from './constants/chainData.json';
+import { AllTokenInfo, AllTokenChainInfo } from './type';
 
-import split_tokens_1 from './dashboard_components/constants/tokenList/split_tokens_1.json';
-import split_tokens_2 from './dashboard_components/constants/tokenList/split_tokens_2.json';
-import split_tokens_3 from './dashboard_components/constants/tokenList/split_tokens_3.json';
-import split_tokens_4 from './dashboard_components/constants/tokenList/split_tokens_4.json';
-import split_tokens_5 from './dashboard_components/constants/tokenList/split_tokens_5.json';
-import split_tokens_6 from './dashboard_components/constants/tokenList/split_tokens_6.json';
-import split_tokens_7 from './dashboard_components/constants/tokenList/split_tokens_7.json';
+import chainifiedList from './constants/chainifiedList.json';
 
-const jsonTokenLists = [split_tokens_1, split_tokens_2, split_tokens_3, split_tokens_4, 
-    split_tokens_5, split_tokens_6, split_tokens_7];
+const jsonTokenLists = [chainifiedList];
 
 const publicClients = clients;
 
@@ -69,8 +60,6 @@ export const GetWalletBalances = async (address: `0x${string}`) => {
             const allBalances = await Promise.all(balancePromises.flat()); // .flat()  => [[{}],[{}]] => [{},{}] Because we did flatMap before 
             const newTokenInfo = allBalances.reduce((acc, balance) => ({ ...acc, ...balance }), {}); // Transform the array into an object [{},{}] => {0:{},1:{}}
             allTokenInfo = { ...allTokenInfo, ...newTokenInfo };
-
-            await new Promise(resolve => setTimeout(resolve, 10000)); // Wait 10 seconds between each request
         }
 
         // For the token chain :

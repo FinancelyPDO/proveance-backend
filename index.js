@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const getWalletBalances_1 = require("./Web3Balance/getWalletBalances");
 // App config
 const cors = require('cors');
 const app = (0, express_1.default)();
@@ -64,6 +65,13 @@ app.post('/api/web2/payments', (req, res) => {
         .catch((error) => {
         console.error('Error:', error);
     });
+});
+app.post('/api/web3/passaddress', (req, res) => {
+    const ethAddress = req.body.ethAddress;
+    if (!ethAddress) {
+        return res.status(400).send('Ethereum address is required');
+    }
+    res.json((0, getWalletBalances_1.GetWalletBalances)(ethAddress));
 });
 app.listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
