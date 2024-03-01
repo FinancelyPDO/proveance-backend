@@ -65,7 +65,6 @@ const clients: { [key: number]: PublicClient} = {
     1: createPublicClient({ chain: mainnet, transport: http(), batch: {multicall: {wait: 32,},}}),
     11155111: createPublicClient({ chain: sepolia, transport: http(), batch: {multicall: {wait: 32,},} }), //To erase
     42161: createPublicClient({ chain: arbitrum, transport: http(), batch: {multicall: {wait: 32,},} }),
-    10: createPublicClient({ chain: optimism, transport: http(), batch: {multicall: {wait: 32,},} }),
     137: createPublicClient({ chain: polygon, transport: http(), batch: {multicall: {wait: 32,},} }),
     42220: createPublicClient({ chain: celo as Chain, transport: http(), batch: {multicall: {wait: 32,},} }), // Put 'celo as Chain' because celo has a formatter (But need to check if there's a mistake).
     56: createPublicClient({ chain: bsc, transport: http(), batch: {multicall: {wait: 32,},} }),
@@ -73,7 +72,8 @@ const clients: { [key: number]: PublicClient} = {
     43113: createPublicClient({ chain: avalancheFuji, transport: http(), batch: {multicall: {wait: 32,},} }), //To erase
     8453: createPublicClient({ chain: base, transport: http(), batch: {multicall: {wait: 32,},} }),
   };
-
+  // 10: createPublicClient({ chain: optimism, transport: http(), batch: {multicall: {wait: 32,},} }),
+  
 export default clients;
 
 const chainIdToNameMap = {
