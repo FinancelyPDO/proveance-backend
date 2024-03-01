@@ -104,6 +104,7 @@ app.post('/api/web3/passaddress', (req, res) => {
     if (!ethAddress) {
         return res.status(400).send('Ethereum address is required');
     }
+    console.log('Ethereum address:', ethAddress);
     res.json((0, getWalletBalances_1.GetWalletBalances)(ethAddress));
 });
 app.listen(port, () => {
