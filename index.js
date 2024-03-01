@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const getWalletBalances_1 = require("./Web3Balance/getWalletBalances");
-const calculateTotalBalance_1 = require("./Web3Balance/calculateTotalBalances");
+const calculateTotalBalances_1 = require("./Web3Balance/calculateTotalBalances");
 // App config
 const cors = require('cors');
 const app = (0, express_1.default)();
@@ -123,7 +123,7 @@ app.post('/api/web3/calculateWeb3Balance', (req, res) => __awaiter(void 0, void 
     if (!Json) {
         return res.status(400).send('Json is required');
     }
-    const test = yield (0, calculateTotalBalance_1.calculateTotalBalance)(Json);
+    const test = yield (0, calculateTotalBalances_1.calculateTotalBalance)(Json);
     res.json(test);
 }));
 app.listen(port, () => {

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.calculateTotalBalance = void 0;
 const calculateTotalBalance = (json) => {
     let totalBalance = 0;
     try {
@@ -15,3 +17,4 @@ const calculateTotalBalance = (json) => {
     }
     return totalBalance;
 };
+exports.calculateTotalBalance = calculateTotalBalance;
