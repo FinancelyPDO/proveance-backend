@@ -124,6 +124,7 @@ app.post('/api/web3/calculateWeb3Balance', (req, res) => __awaiter(void 0, void 
         return res.status(400).send('Json is required');
     }
     const test = yield (0, calculateTotalBalances_1.calculateTotalBalance)(Json);
+    console.log('test is ', test);
     res.json(test);
 }));
 app.listen(port, () => {
