@@ -74,19 +74,16 @@ app.post('/api/web3/recoverAddressInfo', async (req, res) => {
   if (!ethAddress) {
     return res.status(400).send('Ethereum address is required');
   }
-  const test = await GetWalletBalances(ethAddress);
-  res.json(test);
+  res.json(await GetWalletBalances(ethAddress));
 });
 
 app.post('/api/web3/calculateWeb3Balance', async (req, res) => {
-    console.log(req.body);
-    const Json = req.body.newJson;
+    const newaddressdata = req.body.addressdata;
 
-  if (!Json) {
-    return res.status(400).send('Json is required');
-  }
-  const test = await calculateTotalBalance(Json);
-  res.json(test);
+    if (!newaddressdata) {
+        return res.status(400).send('The New address data are required');
+    }
+    res.json(await calculateTotalBalance(newaddressdata));
 });
 
 app.listen(port, () => {

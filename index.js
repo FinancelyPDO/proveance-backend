@@ -81,17 +81,14 @@ app.post('/api/web3/recoverAddressInfo', (req, res) => __awaiter(void 0, void 0,
     if (!ethAddress) {
         return res.status(400).send('Ethereum address is required');
     }
-    const test = yield (0, getWalletBalances_1.GetWalletBalances)(ethAddress);
-    res.json(test);
+    res.json(yield (0, getWalletBalances_1.GetWalletBalances)(ethAddress));
 }));
 app.post('/api/web3/calculateWeb3Balance', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
-    const Json = req.body.newJson;
-    if (!Json) {
-        return res.status(400).send('Json is required');
+    const newaddressdata = req.body.addressdata;
+    if (!newaddressdata) {
+        return res.status(400).send('The New address data are required');
     }
-    const test = yield (0, calculateTotalBalances_1.calculateTotalBalance)(Json);
-    res.json(test);
+    res.json(yield (0, calculateTotalBalances_1.calculateTotalBalance)(newaddressdata));
 }));
 app.listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
