@@ -61,28 +61,29 @@ export const GetWalletBalances = async (address: `0x${string}`) => {
             const newTokenInfo = allBalances.reduce((acc, balance) => ({ ...acc, ...balance }), {}); // Transform the array into an object [{},{}] => {0:{},1:{}}
             allTokenInfo = { ...allTokenInfo, ...newTokenInfo };
         }
-
+        console.log(allTokenInfo)
         // For the token chain :
-        const chainBalancePromises = chainData.chains.map(chain => {
-            return publicClients[chain.chainId].getBalance({ address }).then(rawBalance => {
-                const balance = formatUnits(rawBalance, chain.decimals);
-                if (balance && balance != '0') {
-                    return {
-                        [chain.chainId]: {
-                            name: chain.name,
-                            symbol: chain.symbol,
-                            decimals: chain.decimals,
-                            logoURI: chain.logoURI,
-                            balance: balance
-                        }
-                    };
-                }
-            }).catch(error => { });
-        });
+        // const chainBalancePromises = chainData.chains.map(chain => {
+        //     return publicClients[chain.chainId].getBalance({ address }).then(rawBalance => {
+        //         const balance = formatUnits(rawBalance, chain.decimals);
+        //         if (balance && balance != '0') {
+        //             return {
+        //                 [chain.chainId]: {
+        //                     name: chain.name,
+        //                     symbol: chain.symbol,
+        //                     decimals: chain.decimals,
+        //                     logoURI: chain.logoURI,
+        //                     balance: balance
+        //                 }
+        //             };
+        //         }
+        //     }).catch(error => { });
+        // });
 
-        const allChainBalances = await Promise.all(chainBalancePromises);
-        const tempallTokenChainInfo = allChainBalances.reduce((acc, balance) => ({ ...acc, ...balance }), {});  
-        allTokenChainInfo = { ...allTokenChainInfo, ...tempallTokenChainInfo }; //I do this because I have a typescript error of void ... (I could do this either : // @ts-ignore )
+        // const allChainBalances = await Promise.all(chainBalancePromises);
+        // const tempallTokenChainInfo = allChainBalances.reduce((acc, balance) => ({ ...acc, ...balance }), {});  
+        // allTokenChainInfo = { ...allTokenChainInfo, ...tempallTokenChainInfo }; //I do this because I have a typescript error of void ... (I could do this either : // @ts-ignore )
     }
-    return { allTokenInfo, allTokenChainInfo };
+    return { allTokenInfo };
+
 };

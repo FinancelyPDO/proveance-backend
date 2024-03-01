@@ -71,8 +71,8 @@ const clients: { [key: number]: PublicClient} = {
     43114: createPublicClient({ chain: avalanche, transport: http(), batch: {multicall: {wait: 32,},} }),
     43113: createPublicClient({ chain: avalancheFuji, transport: http(), batch: {multicall: {wait: 32,},} }), //To erase
     8453: createPublicClient({ chain: base, transport: http(), batch: {multicall: {wait: 32,},} }),
-  };
-  // 10: createPublicClient({ chain: optimism, transport: http(), batch: {multicall: {wait: 32,},} }),
+    10: createPublicClient({ chain: optimism, transport: http(), batch: {multicall: {wait: 32,},} }),
+  }; 
   
 export default clients;
 
