@@ -68,15 +68,23 @@ app.post('/api/web2/payments', (req, res) => {
     });
 });
 
-app.post('/api/web3/passaddress', async (req, res) => {
+app.post('/api/web3/recoverAddressInfo', async (req, res) => {
     const ethAddress = req.body.ethAddress;
 
   if (!ethAddress) {
     return res.status(400).send('Ethereum address is required');
   }
-  console.log()
   const test = await GetWalletBalances(ethAddress);
-  console.log("THIS IS THE RESPONSE", test);
+  res.json(test);
+});
+
+app.post('/api/web3/calculateWeb3Balance', async (req, res) => {
+    const Json = req.body.Json;
+
+  if (!Json) {
+    return res.status(400).send('Json is required');
+  }
+  const test = await calculateTotalBalance(Json);
   res.json(test);
 });
 
