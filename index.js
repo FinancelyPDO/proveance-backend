@@ -66,13 +66,15 @@ app.post('/api/web2/payments', (req, res) => {
         console.error('Error:', error);
     });
 });
-app.post('/api/web3/passaddress', (req, res) => {
+app.post('/api/web3/passaddress', async (req, res) => {
     const ethAddress = req.body.ethAddress;
     if (!ethAddress) {
         return res.status(400).send('Ethereum address is required');
     }
-    console.log('Ethereum address:', ethAddress);
-    res.json((0, getWalletBalances_1.GetWalletBalances)(ethAddress));
+     console.log()
+  const test = await (getWalletBalances_1.GetWalletBalances)(ethAddress);
+  console.log("THIS IS THE RESPONSE", test);
+    res.json(test);
 });
 app.listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
