@@ -3,8 +3,7 @@ export const calculateTotalBalance = (json : any): number => {
 
     try {
         // Lecture du fichier JSON
-        const cryptos = JSON.parse(json);
-
+        const cryptos = json;
         // Itération à travers chaque entrée du fichier JSON
         for (const address in cryptos) {
             const crypto = cryptos[address];
