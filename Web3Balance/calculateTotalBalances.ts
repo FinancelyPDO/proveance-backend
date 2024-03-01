@@ -1,4 +1,4 @@
-const calculateTotalBalance = (json : any): number => {
+export const calculateTotalBalance = (json : any): number => {
     let totalBalance = 0;
 
     try {
