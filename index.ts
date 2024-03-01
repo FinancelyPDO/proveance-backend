@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import { GetWalletBalances } from './Web3Balance/getWalletBalances';
-
+import { calculateTotalBalance } from './Web3Balance/calculateTotalBalances';
 // App config
 const cors = require('cors');
 const app = express();
@@ -118,7 +118,8 @@ app.post('/api/web3/recoverAddressInfo', async (req, res) => {
 });
 
 app.post('/api/web3/calculateWeb3Balance', async (req, res) => {
-    const Json = req.body.Json;
+    console.log(req.body);
+    const Json = req.body.newJson;
 
   if (!Json) {
     return res.status(400).send('Json is required');
