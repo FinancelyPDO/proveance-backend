@@ -89,6 +89,6 @@ const GetWalletBalances = (address) => __awaiter(void 0, void 0, void 0, functio
         // const tempallTokenChainInfo = allChainBalances.reduce((acc, balance) => ({ ...acc, ...balance }), {});  
         // allTokenChainInfo = { ...allTokenChainInfo, ...tempallTokenChainInfo }; //I do this because I have a typescript error of void ... (I could do this either : // @ts-ignore )
     }
-    return { allTokenInfo };
+    return allTokenInfo;
 });
 exports.GetWalletBalances = GetWalletBalances;
