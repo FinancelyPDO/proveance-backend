@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -99,16 +108,22 @@ app.post('/api/web2/payments', (req, res) => {
         console.error('Error:', error);
     });
 });
-app.post('/api/web3/passaddress', async (req, res) => {
+app.post('/api/web3/recoverAddressInfo', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const ethAddress = req.body.ethAddress;
     if (!ethAddress) {
         return res.status(400).send('Ethereum address is required');
     }
-     console.log()
-  const test = await (getWalletBalances_1.GetWalletBalances)(ethAddress);
-  console.log("THIS IS THE RESPONSE", test);
+    const test = yield (0, getWalletBalances_1.GetWalletBalances)(ethAddress);
     res.json(test);
-});
+}));
+app.post('/api/web3/calculateWeb3Balance', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const Json = req.body.Json;
+    if (!Json) {
+        return res.status(400).send('Json is required');
+    }
+    const test = yield calculateTotalBalance(Json);
+    res.json(test);
+}));
 app.listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}`);
 });

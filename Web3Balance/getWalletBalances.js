@@ -67,7 +67,6 @@ const GetWalletBalances = (address) => __awaiter(void 0, void 0, void 0, functio
             const newTokenInfo = allBalances.reduce((acc, balance) => (Object.assign(Object.assign({}, acc), balance)), {}); // Transform the array into an object [{},{}] => {0:{},1:{}}
             allTokenInfo = Object.assign(Object.assign({}, allTokenInfo), newTokenInfo);
         }
-        console.log(allTokenInfo);
         // For the token chain :
         // const chainBalancePromises = chainData.chains.map(chain => {
         //     return publicClients[chain.chainId].getBalance({ address }).then(rawBalance => {
@@ -89,6 +88,6 @@ const GetWalletBalances = (address) => __awaiter(void 0, void 0, void 0, functio
         // const tempallTokenChainInfo = allChainBalances.reduce((acc, balance) => ({ ...acc, ...balance }), {});  
         // allTokenChainInfo = { ...allTokenChainInfo, ...tempallTokenChainInfo }; //I do this because I have a typescript error of void ... (I could do this either : // @ts-ignore )
     }
-    return allTokenInfo;
+    return { allTokenInfo };
 });
 exports.GetWalletBalances = GetWalletBalances;
