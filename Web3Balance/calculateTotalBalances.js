@@ -8,7 +8,6 @@ const calculateTotalBalance = (json) => {
         const cryptos = json;
         // Itération à travers chaque entrée du fichier JSON
         for (const address in cryptos) {
-            console.log(address);
             const crypto = cryptos[address];
             totalBalance += crypto.total; // Ajout de la balance totale de chaque cryptomonnaie
         }
@@ -16,8 +15,6 @@ const calculateTotalBalance = (json) => {
     catch (error) {
         console.error('Erreur lors de la lecture du fichier JSON:', error);
     }
-    return {
-        totaleBalance: totalBalance
-      };
+    return totalBalance;
 };
 exports.calculateTotalBalance = calculateTotalBalance;
