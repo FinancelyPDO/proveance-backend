@@ -12,41 +12,8 @@ app.use(cors());
 app.use(express_1.default.json());
 // Env config
 dotenv_1.default.config();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 // Routes
-app.get('/api/web2/connection', (req, res) => {
-    const redirectUrl = 'https://buildhathon-sandbox.biapi.pro/2.0/auth/webview/connect?client_id=61176337&redirect_uri=http://localhost:8000/api/web2/access';
-    res.redirect(redirectUrl);
-});
-app.get('/api/web2/access', (req, res) => {
-    const code = req.query.code;
-    const connectionId = req.query.connection_id;
-    console.log('Code:', code);
-    console.log('Connection ID:', connectionId);
-    const data = {
-        code: code,
-        client_id: process.env.CLIENT_ID,
-        client_secret: process.env.CLIENT_SECRET
-    };
-    fetch(`https://buildhathon-sandbox.biapi.pro/2.0/auth/token/access`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-        console.log('Access Token:', data.access_token);
-        const resAccess = {
-            access_token: data.access_token
-        };
-        res.redirect(`http://localhost:3000/proof-of-reserve?access_token=${data.access_token}`);
-    })
-        .catch((error) => {
-        console.error('Error:', error);
-    });
-});
 app.post('/api/web2/balance', (req, res) => {
     const { access_token } = req.body;
     fetch(`https://buildhathon-sandbox.biapi.pro/2.0/users/me/accounts`, {
