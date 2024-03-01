@@ -84,6 +84,6 @@ export const GetWalletBalances = async (address: `0x${string}`) => {
         // allTokenChainInfo = { ...allTokenChainInfo, ...tempallTokenChainInfo }; //I do this because I have a typescript error of void ... (I could do this either : // @ts-ignore )
     }
     
-    return { allTokenInfo };
+    return allTokenInfo;
 
 };
