@@ -1,2 +1,2 @@
-# proveance-backend
-Proveance dApp backend.
+# provehance-backend
+Provehance dApp backend.
