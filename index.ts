@@ -27,7 +27,7 @@ let kycData: KYCData[] = [];
 // Routes
 
 // WEB2 API FUNCTIONS
-app.post('/api/web2/accounts', (req, res) => {
+app.post('/web2/accounts', (req, res) => {
     const { access_token } = req.body;
 
     fetch(`https://oxeniotna-sandbox.biapi.pro/2.0/users/me/accounts`, {
@@ -49,7 +49,7 @@ app.post('/api/web2/accounts', (req, res) => {
         });
 });
 
-app.post('/api/web2/transactions', (req, res) => {
+app.post('/web2/transactions', (req, res) => {
     const { access_token, amount, name, condition } = req.body; // Date to be add
     let validTransactions: any[] = [];
 
@@ -82,7 +82,7 @@ app.post('/api/web2/transactions', (req, res) => {
         });
 });
 
-app.post('/api/web2/creditscore', (req, res) => {
+app.post('/web2/creditscore', (req, res) => {
     const { access_token } = req.body;
 
     function normalize(value: number, min: number, max: number): number {
@@ -108,10 +108,10 @@ app.post('/api/web2/creditscore', (req, res) => {
 
     const normalizedScore = normalize(score, 0, 10);
 
-    return normalizedScore;
+    res.json(normalizedScore);
 });
 
-app.post('/api/web2/savekyc', async (req, res) => {
+app.post('/web2/savekyc', async (req, res) => {
     const { address, firstname, lastname, bank_id } = req.body;
 
     const newKYC: KYCData = {
@@ -126,7 +126,7 @@ app.post('/api/web2/savekyc', async (req, res) => {
     res.status(201).json({ message: 'KYC information saved successfully' });
 });
 
-app.post('/api/web2/getkyc', async (req, res) => {
+app.post('/web2/getkyc', async (req, res) => {
     const { address } = req.body;
 
     const kycInfo = kycData.find(entry => entry.address === address);
@@ -140,7 +140,7 @@ app.post('/api/web2/getkyc', async (req, res) => {
 
 
 // WEB3 API FUNCTIONS
-app.post('/api/web3/recoverAddressInfo', async (req, res) => {
+app.post('/web3/recoverAddressInfo', async (req, res) => {
     const ethAddress = req.body.ethAddress;
 
     if (!ethAddress) {
@@ -149,7 +149,7 @@ app.post('/api/web3/recoverAddressInfo', async (req, res) => {
     res.json(await GetWalletBalances(ethAddress));
 });
 
-app.post('/api/web3/calculateWeb3Balance', async (req, res) => {
+app.post('/web3/calculateWeb3Balance', async (req, res) => {
     const newaddressdata = req.body.addressdata;
 
     if (!newaddressdata) {

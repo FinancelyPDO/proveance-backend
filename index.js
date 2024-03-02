@@ -28,7 +28,7 @@ const port = process.env.PORT || 8000;
 let kycData = [];
 // Routes
 // WEB2 API FUNCTIONS
-app.post('/api/web2/accounts', (req, res) => {
+app.post('/web2/accounts', (req, res) => {
     const { access_token } = req.body;
     fetch(`https://oxeniotna-sandbox.biapi.pro/2.0/users/me/accounts`, {
         method: 'GET',
@@ -48,7 +48,7 @@ app.post('/api/web2/accounts', (req, res) => {
         console.error('Error:', error);
     });
 });
-app.post('/api/web2/transactions', (req, res) => {
+app.post('/web2/transactions', (req, res) => {
     const { access_token, amount, name, condition } = req.body; // Date to be add
     let validTransactions = [];
     fetch(`https://oxeniotna-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
@@ -79,15 +79,15 @@ app.post('/api/web2/transactions', (req, res) => {
         console.error('Error:', error);
     });
 });
-app.post('/api/web2/creditscore', (req, res) => {
+app.post('/web2/creditscore', (req, res) => {
     const { access_token } = req.body;
     function normalize(value, min, max) {
         return (value - min) / (max - min);
     }
     // Not implemented yet: this data needs be performed by an AI for categorization of bank transactions
-    let income = 3000;
-    let creditHistory = 3;
-    let jobStability = 2;
+    let income = 5000;
+    let creditHistory = 2;
+    let jobStability = 4;
     const incomeWeight = 0.4;
     const creditHistoryWeight = 0.3;
     const jobStabilityWeight = 0.3;
@@ -98,9 +98,9 @@ app.post('/api/web2/creditscore', (req, res) => {
         (normalizedCreditHistory * creditHistoryWeight) +
         (normalizedJobStability * jobStabilityWeight);
     const normalizedScore = normalize(score, 0, 10);
-    return normalizedScore;
+    res.json(normalizedScore);
 });
-app.post('/api/web2/savekyc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/web2/savekyc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { address, firstname, lastname, bank_id } = req.body;
     const newKYC = {
         address,
@@ -111,7 +111,7 @@ app.post('/api/web2/savekyc', (req, res) => __awaiter(void 0, void 0, void 0, fu
     kycData.push(newKYC);
     res.status(201).json({ message: 'KYC information saved successfully' });
 }));
-app.post('/api/web2/getkyc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/web2/getkyc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { address } = req.body;
     const kycInfo = kycData.find(entry => entry.address === address);
     if (kycInfo) {
@@ -122,14 +122,14 @@ app.post('/api/web2/getkyc', (req, res) => __awaiter(void 0, void 0, void 0, fun
     }
 }));
 // WEB3 API FUNCTIONS
-app.post('/api/web3/recoverAddressInfo', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/web3/recoverAddressInfo', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const ethAddress = req.body.ethAddress;
     if (!ethAddress) {
         return res.status(400).send('Ethereum address is required');
     }
     res.json(yield (0, getWalletBalances_1.GetWalletBalances)(ethAddress));
 }));
-app.post('/api/web3/calculateWeb3Balance', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/web3/calculateWeb3Balance', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const newaddressdata = req.body.addressdata;
     if (!newaddressdata) {
         return res.status(400).send('The New address data are required');
