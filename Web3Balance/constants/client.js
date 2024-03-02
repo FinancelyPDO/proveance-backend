@@ -50,13 +50,13 @@ exports.base = (0, viem_2.defineChain)({
 //or : https://developers.cloudflare.com/web3/how-to/use-ethereum-gateway/
 const clients = {
     1: (0, viem_1.createPublicClient)({ chain: chains_1.mainnet, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
-    11155111: (0, viem_1.createPublicClient)({ chain: chains_1.sepolia, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }), //To erase
+    11155111: (0, viem_1.createPublicClient)({ chain: chains_1.sepolia, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
     42161: (0, viem_1.createPublicClient)({ chain: chains_1.arbitrum, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
     137: (0, viem_1.createPublicClient)({ chain: chains_1.polygon, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
-    42220: (0, viem_1.createPublicClient)({ chain: chains_1.celo, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }), // Put 'celo as Chain' because celo has a formatter (But need to check if there's a mistake).
+    42220: (0, viem_1.createPublicClient)({ chain: chains_1.celo, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
     56: (0, viem_1.createPublicClient)({ chain: chains_1.bsc, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
     43114: (0, viem_1.createPublicClient)({ chain: chains_1.avalanche, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
-    43113: (0, viem_1.createPublicClient)({ chain: chains_1.avalancheFuji, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }), //To erase
+    43113: (0, viem_1.createPublicClient)({ chain: chains_1.avalancheFuji, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
     8453: (0, viem_1.createPublicClient)({ chain: exports.base, transport: (0, viem_1.http)(), batch: { multicall: { wait: 32, }, } }),
 };
 // 10: createPublicClient({ chain: optimism, transport: http(), batch: {multicall: {wait: 32,},} }),

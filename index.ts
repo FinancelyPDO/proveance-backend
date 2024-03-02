@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { GetWalletBalances } from './Web3Balance/getWalletBalances';
 import { calculateTotalBalance } from './Web3Balance/calculateTotalBalances';
+
 // App config
 const cors = require('cors');
 const app = express();
@@ -13,10 +14,12 @@ dotenv.config();
 const port = process.env.PORT || 8000;
 
 // Routes
-app.post('/api/web2/balance', (req, res) => {
+
+// WEB2 API FUNCTIONS
+app.post('/api/web2/accounts', (req, res) => {
     const { access_token } = req.body;
 
-    fetch(`https://buildhathon-sandbox.biapi.pro/2.0/users/me/accounts`, {
+    fetch(`https://oxeniotna-sandbox.biapi.pro/2.0/users/me/accounts`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + access_token,
@@ -35,11 +38,11 @@ app.post('/api/web2/balance', (req, res) => {
     });
 });
 
-app.post('/api/web2/payments', (req, res) => {
-    const { access_token, limit_date, amount, name, condition } = req.body;
-    let nbPayments = 0;
+app.post('/api/web2/transactions', (req, res) => {
+    const { access_token, amount, name, condition } = req.body; // Date to be add
+    let validTransactions: any[] = [];
 
-    fetch(`https://buildhathon-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
+    fetch(`https://oxeniotna-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + access_token,
@@ -49,25 +52,26 @@ app.post('/api/web2/payments', (req, res) => {
     .then((response: any) => response.json())
     .then((data: any) => {
         data.transactions.map((transaction: any) => {
-            if (transaction.date >= limit_date && transaction.wording == name) {
+            if (transaction.wording == name) { // date to be added (transaction.date >= date)
                 if (condition == "low" && Math.abs(transaction.value) < amount) {
-                    nbPayments++;
+                    validTransactions.push(transaction);
                 }
-                if (condition == "high" && Math.abs(transaction.value) > amount) {
-                    nbPayments++;
+                else if (condition == "high" && Math.abs(transaction.value) > amount) {
+                    validTransactions.push(transaction);
                 }
-                if (condition == "equl" && Math.abs(transaction.value) == amount) {
-                    nbPayments++;
+                else if (condition == "equl" && Math.abs(transaction.value) == amount) {
+                    validTransactions.push(transaction);
                 }
             }
         })
-        res.json(nbPayments);
+        res.json(validTransactions);
     })
     .catch((error: any) => {
         console.error('Error:', error);
     });
 });
 
+// WEB3 API FUNCTIONS
 app.post('/api/web3/recoverAddressInfo', async (req, res) => {
     const ethAddress = req.body.ethAddress;
 
