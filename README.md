@@ -4,11 +4,11 @@ Welcome to Provehance backend repository, the ultimate backend solution for proc
 
 ## Features
 
-**Web2 Accounts**: Access and manage traditional bank account balances. 💳
-**Web2 Transactions**: Filter and retrieve banking transactions based on custom conditions. 🧾
-**Web2 Credit Score**: Calculate a credit score using a customizable algorithm. (Note: AI categorization not implemented yet). 📊
-**Web2 KYC**: Store and retrieve Know Your Customer (KYC) data securely. 🛂
-**Web3 Functions**: Recover balance information from blockchain addresses. 🔗
+- **Web2 Accounts**: Access and manage traditional bank account balances. 💳
+- **Web2 Transactions**: Filter and retrieve banking transactions based on custom conditions. 🧾
+- **Web2 Credit Score**: Calculate a credit score using a customizable algorithm. (Note: AI categorization not implemented yet). 📊
+- **Web2 KYC**: Store and retrieve Know Your Customer (KYC) data securely. 🛂
+- **Web3 Functions**: Recover balance information from blockchain addresses. 🔗
 
 ## Setup
 - Make sure you have Node.js installed on your machine.
@@ -24,8 +24,6 @@ env
 Copy code
 PORT=8000 # The port on which the server should listen
 ```
-
-# Add other configurations as needed
 
 ## API Endpoints
 
