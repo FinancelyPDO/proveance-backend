@@ -30,7 +30,7 @@ let kycData: KYCData[] = [];
 app.post('/web2/accounts', (req, res) => {
     const { access_token } = req.body;
 
-    fetch(`https://oxeniotna-sandbox.biapi.pro/2.0/users/me/accounts`, {
+    fetch(`https://ethdenver-sandbox.biapi.pro/2.0/users/me/accounts`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + access_token,
@@ -53,7 +53,7 @@ app.post('/web2/transactions', (req, res) => {
     const { access_token, amount, name, condition } = req.body; // Date to be add
     let validTransactions: any[] = [];
 
-    fetch(`https://oxeniotna-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
+    fetch(`https://ethdenver-sandbox.biapi.pro/2.0/users/me/transactions?limit=1000`, {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + access_token,
