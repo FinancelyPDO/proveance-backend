@@ -90,9 +90,9 @@ app.post('/api/web2/creditscore', (req, res) => {
     }
 
     // Not implemented yet: this data needs be performed by an AI for categorization of bank transactions
-    let income = 3000
-    let creditHistory = 3
-    let jobStability = 2
+    let income = 5000
+    let creditHistory = 2
+    let jobStability = 4
 
     const incomeWeight = 0.4;
     const creditHistoryWeight = 0.3;
