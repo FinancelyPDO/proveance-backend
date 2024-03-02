@@ -27,11 +27,11 @@ PORT=8000 # The port on which the server should listen
 
 ## API Endpoints
 
-**POST** /web2/accounts: Fetch the balance data from bank account api.
-**POST** /web2/transactions: Get bank account transactions that match given criteria.
-**POST** /web2/creditscore: Compute a credit score based on income, credit history, and job stability.
-**POST** /web2/savekyc: Save KYC data for later retrieval.
-**POST** /web2/getkyc: Retrieve KYC data for a given address.
+- **POST** /web2/accounts: Fetch the balance data from bank account api.
+- **POST** /web2/transactions: Get bank account transactions that match given criteria.
+- **POST** /web2/creditscore: Compute a credit score based on income, credit history, and job stability.
+- **POST** /web2/savekyc: Save KYC data for later retrieval.
+- **POST** /web2/getkyc: Retrieve KYC data for a given address.
 ...and more for Web3 interactions.
 
 ## Contributing
