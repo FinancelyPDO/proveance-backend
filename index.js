@@ -24,6 +24,8 @@ app.use(express_1.default.json());
 // Env config
 dotenv_1.default.config();
 const port = process.env.PORT || 8000;
+// Variables
+let kycData = [];
 // Routes
 // WEB2 API FUNCTIONS
 app.post('/api/web2/accounts', (req, res) => {
@@ -77,6 +79,48 @@ app.post('/api/web2/transactions', (req, res) => {
         console.error('Error:', error);
     });
 });
+app.post('/api/web2/creditscore', (req, res) => {
+    const { access_token } = req.body;
+    function normalize(value, min, max) {
+        return (value - min) / (max - min);
+    }
+    // Not implemented yet: this data needs be performed by an AI for categorization of bank transactions
+    let income = 3000;
+    let creditHistory = 3;
+    let jobStability = 2;
+    const incomeWeight = 0.4;
+    const creditHistoryWeight = 0.3;
+    const jobStabilityWeight = 0.3;
+    const normalizedIncome = normalize(income, 1000, 10000);
+    const normalizedCreditHistory = normalize(creditHistory, 0, 10);
+    const normalizedJobStability = normalize(jobStability, 0, 5);
+    const score = (normalizedIncome * incomeWeight) +
+        (normalizedCreditHistory * creditHistoryWeight) +
+        (normalizedJobStability * jobStabilityWeight);
+    const normalizedScore = normalize(score, 0, 10);
+    return normalizedScore;
+});
+app.post('/api/web2/savekyc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { address, firstname, lastname, bank_id } = req.body;
+    const newKYC = {
+        address,
+        firstname,
+        lastname,
+        bank_id,
+    };
+    kycData.push(newKYC);
+    res.status(201).json({ message: 'KYC information saved successfully' });
+}));
+app.post('/api/web2/getkyc', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { address } = req.body;
+    const kycInfo = kycData.find(entry => entry.address === address);
+    if (kycInfo) {
+        res.json(kycInfo);
+    }
+    else {
+        res.status(404).json({ error: 'KYC information not found for the provided address' });
+    }
+}));
 // WEB3 API FUNCTIONS
 app.post('/api/web3/recoverAddressInfo', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const ethAddress = req.body.ethAddress;
